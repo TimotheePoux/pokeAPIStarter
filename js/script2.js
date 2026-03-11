@@ -18,7 +18,17 @@ selecteur.addEventListener('click', ()=>{
 let typeButtons = document.querySelectorAll('.type');
 typeButtons.forEach(typeChoose =>{
     typeChoose.addEventListener('click', ()=>{
-    dataSorted = dataClean.filter(pokemon => pokemon.types[0].name == typeChoose.value);
+    dataSorted = [];
+    dataClean.forEach(pokemon=>{
+        if (pokemon.types[0].name == typeChoose.value){
+            dataSorted.push(pokemon);
+        }
+        else if(pokemon.types.length==2){
+            if (pokemon.types[1].name == typeChoose.value){
+                dataSorted.push(pokemon);
+            }
+        }
+    })
     loadPKMN();
 });
 });
