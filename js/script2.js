@@ -15,16 +15,17 @@ selecteur.addEventListener('click', ()=>{
     loadPKMN();
 });
 
-let typeButtons = document.querySelectorAll('.type');
-typeButtons.forEach(typeChoose =>{
-    typeChoose.addEventListener('click', ()=>{
+let typeButtons = document.querySelectorAll('.btnType');
+typeButtons.forEach(typeButton =>{
+    typeButton.style.backgroundColor = getTypeColor(typeButton.value);
+    typeButton.addEventListener('click', ()=>{
     dataSorted = [];
     dataClean.forEach(pokemon=>{
-        if (pokemon.types[0].name == typeChoose.value){
+        if (pokemon.types[0].name == typeButton.value){
             dataSorted.push(pokemon);
         }
         else if(pokemon.types.length==2){
-            if (pokemon.types[1].name == typeChoose.value){
+            if (pokemon.types[1].name == typeButton.value){
                 dataSorted.push(pokemon);
             }
         }
