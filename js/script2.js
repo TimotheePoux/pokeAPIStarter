@@ -6,12 +6,14 @@ const data = await fetch (apiLink)
 console.log('Données récupérées :', data);
 
 const dataClean = data.filter(pokemon => pokemon.types != null);
-let dataSorted = dataClean.filter(pokemon => pokemon.generation == 1);
+let gen = 1;
+let dataSorted = dataClean.filter(pokemon => pokemon.generation == gen);
 let selecteur = document.querySelector('select');
 console.log(selecteur.value)
 selecteur.addEventListener('click', ()=>{
     console.log(selecteur.value);
-    dataSorted = dataClean.filter(pokemon => pokemon.generation == selecteur.value);
+    gen = selecteur.value;
+    dataSorted = dataClean.filter(pokemon => pokemon.generation == gen);
     loadPKMN();
 });
 
@@ -21,12 +23,14 @@ typeButtons.forEach(typeButton =>{
     typeButton.addEventListener('click', ()=>{
     dataSorted = [];
     dataClean.forEach(pokemon=>{
-        if (pokemon.types[0].name == typeButton.value){
-            dataSorted.push(pokemon);
-        }
-        else if(pokemon.types.length==2){
-            if (pokemon.types[1].name == typeButton.value){
+        if (pokemon.generation == gen){
+            if (pokemon.types[0].name == typeButton.value){
                 dataSorted.push(pokemon);
+            }
+            else if(pokemon.types.length==2){
+                if (pokemon.types[1].name == typeButton.value){
+                    dataSorted.push(pokemon);
+                }
             }
         }
     })
